@@ -249,12 +249,6 @@ static char *customPath(pid_t pid, int dirFd, const uintptr_t pathNamePtr)
     
 
     return fullPath;
-    // printf("%s\n", fullPath);
-    // int fd = openat(dirFd,fullPath, flags, mode);
-    // if (fd < 0 && errno == ENOENT){
-    //     fd = caseInsensitivePath(fullPath, flags, mode);
-    // }
-    // return fd;
 }
 
 void handleNotifications(int notifyFd)
@@ -368,7 +362,7 @@ void supervisor(int sockPair[2])
 {
     int notifyFd = recvFd(sockPair[1]);
     if (notifyFd == -1) err(EXIT_FAILURE, "recvfd");
-    // closeSocketPair(sockPair);
+    closeSocketPair(sockPair);
 
     handleNotifications(notifyFd);
 }
